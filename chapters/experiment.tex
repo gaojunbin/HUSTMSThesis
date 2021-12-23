@@ -1,0 +1,44 @@
+This chapter of the research proposal gives a concise outline of the work you have carried out so far and of the progress you have made toward the aims of the project. You should concentrate on the parts that contribute specifically to the goals of the thesis, avoiding detailed descriptions of digressions you may have attempted in the earlier, more exploratory, phases of your work. If you have already obtained preliminary results, this is the chapter where you should provide them, in a structured manner that helps supporting the rest of the thesis. \textbf{Table \ref{table_1}} shows the example of multiple line in one row table and \textbf{Table \ref{table_2}} shows the example of multiple row table.
+
+\begin{table}[h]
+
+\caption{\label{table_1}Example of multiple line in one row table - All Tables position is center and bottom by default - to change the figure position please use position command after begin{figure} - \href{https://www.overleaf.com/learn/latex/Tables}{Click Here to see further}}
+
+    \begin{tabular}{c c c c}
+    
+    \hline
+    \thead{Heading \#1} & \thead{Heading \#2} & \thead{Heading \#3} & \thead{Heading \#4} \\ \hline \hline
+    
+    Row \#1 & X1 & X2 & X3 \\ \hline
+    \makecell{Row \#2-1 \\Title \#2-2} & X4 & X5 & X6 \\ \hline
+    Row \#3 & X7 & X8 & X9\\ \hline
+    Row \#4 & X10 & X11 & X12 \\ \hline
+    
+    \end{tabular}
+
+\end{table}
+
+
+ 
+\begin{table}[h]
+
+\caption{\label{table_2}Example of multiple row table - All Tables position is center and bottom by default - to change the figure position please use position command after begin{figure} - \href{https://texblog.org/2012/12/21/multi-column-and-multi-row-cells-in-latex-tables/}{Click Here to see further}}
+
+    \begin{tabular}{c c c} \hline
+    
+    \thead{Heading \#1} & \thead{Heading \#2} & \thead{Heading \#3} \\ \hline \hline
+    
+    \multirow{5}{*}{Multi-Row \#1}  & X1 \cite{article} & X2  \\
+                                        & X3 \cite{book} & X4  \\
+                                        & X5 \cite{booklet} & X6  \\
+                                        & X7 \cite{conference} & X8  \\
+                                        & X9 \cite{inbook} & X10  \\ \hline
+                                        
+    \multirow{2}{*}{Multi-Row \#2}   & X11 \cite{incollection} & X12 \\
+                                    & X13 \cite{manual} & X14 \\ \hline
+                                    
+    Multi-Row \#3 & X15 \cite{mastersthesis} & X16 \\ \hline
+        
+    \end{tabular}
+    
+ \end{table}

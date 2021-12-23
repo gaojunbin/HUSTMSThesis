@@ -1,0 +1,249 @@
+%%
+%% This is the file 'HUSTMSThesisOpen.tex' designed for the M.S. Student thesis at Huazhong University of Science and Technology.
+%%
+%%
+%% Copyright (C) 2021 by Junbin Gao 高君彬
+%% <Github> https://github.com/junbingao/HUSTThesis
+
+% **************************************************************************************
+% Set document class, paper size and font size
+% **************************************************************************************
+
+\documentclass[a4paper, 12pt]{article}
+
+
+% **************************************************************************************
+% Loading Package and set global formatting
+% **************************************************************************************
+
+% page setup
+% --------------------------------------------------------------------------------------
+\usepackage{geometry} % page setup and layout
+        \geometry{left = 1in, top = 1.3in, bottom = 1.3in, right = 1in}
+\usepackage{microtype} % makes pdf look better
+\usepackage{multicol} % use multi-column in the page
+
+% text and paragraph formatting
+% --------------------------------------------------------------------------------------
+\usepackage{color} % creates coloured text and background
+\usepackage{blindtext} % if needed, use dummy text
+\usepackage[utf8]{inputenc} % encoding characters
+\usepackage{mathptmx} % similar to times new roman font and set fontsize
+\usepackage{CJKutf8} % chinese (gbsn/gkai class available), japanese, korean language conversion
+\usepackage{anyfontsize} % use /fontsize to select any font size
+        \renewcommand{\baselinestretch}{1.5} % set linespacing = 1.5; equivalent to word file = 1.5
+\usepackage{indentfirst} % indent first paragraph after each chapter/section
+        \edef\restoreparindent{\parindent=\the\parindent\relax} % define new function to save indentation
+\usepackage{enumitem} % itemize spacing control
+        \setlist{itemsep = 0pt, parsep = 0pt}
+\usepackage[nodayofweek]{datetime} % live date display
+\usepackage{parskip} % paragraph spacing in the main body only
+        \restoreparindent % restore the previous indentation
+        \setlength{\parskip}{5pt} % paragraph spacing in the body
+        
+% header, footer environment
+% --------------------------------------------------------------------------------------
+        \setlength{\headheight}{15pt} % set header height to fix error from fancyheader
+\usepackage{fancyhdr} % header and footer
+
+% title page
+% --------------------------------------------------------------------------------------
+\usepackage{etoolbox} % all pages same header and footer included chapter 1st page but excluded title page
+        \AtBeginEnvironment{titlepage}{\renewcommand{\baselinestretch}{1.3}} % titlepage text line spacing
+        
+% chapter, section, subsection heading
+% --------------------------------------------------------------------------------------
+\usepackage{titlesec} % chapter, section title formatting
+        \titleformat{\chapter}[display]{\fontsize{20}{0}\bfseries\centering}{\centering\chaptertitlename\ \thechapter}{5pt}{\fontsize{20}{0}}
+        \titleformat{\section}{\fontsize{16}{0}\bfseries}{\thesection}{8pt}{}
+        \titleformat{\subsection}{\fontsize{14}{0}\bfseries}{\thesubsection}{8pt}{}
+        \titleformat{\subsubsection}{\fontsize{12}{0}\bfseries\itshape}{\thesubsubsection}{8pt}{}
+        \titlespacing*{\chapter}{0pt}{0pt}{20pt} % \titlespacing*{<command>}{<left>}{<before-sep>}{<after-sep>}
+        \titlespacing*{\section}{0pt}{15pt}{0pt}
+        \titlespacing*{\subsection}{0pt}{15pt}{0pt}
+        \titlespacing*{\subsubsection}{0pt}{15pt}{0pt}
+        
+% table of contents, list of figures, list of tables, list of abbreviations
+% --------------------------------------------------------------------------------------
+\usepackage[nottoc]{tocbibind} % add lof, lot to table of contents
+        \setcounter{secnumdepth}{3} % use level-3 (subsubsection) in numbering
+        \setcounter{tocdepth}{3} %  use level-3 (subsubsection) in toc
+\usepackage{titletoc} % change toc style
+        \newcommand{\setupname}[1][\chaptername]{\titlecontents{chapter}[0pt]{\vspace{1ex}}{\bfseries#1~\thecontentslabel\ : }{\bfseries}{\bfseries\hfill\contentspage}[]} % add chapter name before chapter name in toc and adjust spacing between chapters
+\usepackage[hidelinks]{hyperref} % use bookmark from toc with hyperlink and hide the color of the link
+\usepackage[titletoc]{appendix} % use appendix as "Appenix" in toc
+\usepackage{acronym} % abbreviation list
+
+% table environment
+% --------------------------------------------------------------------------------------
+\usepackage[table]{xcolor} % add table and coloring the rows and columns in tabular package
+\usepackage{colortbl} % use table /cellcolor and other table coloring
+\usepackage{multirow} % use multiple rows in the tablular environment
+\usepackage{booktabs} % help using advanced table options
+\usepackage{array} % use table styles and formatting
+        \setlength{\arrayrulewidth}{0.5mm} % table width in tabular package
+        \setlength{\tabcolsep}{7pt} % table column separator in tabular package
+        \renewcommand{\arraystretch}{1.3} % table stretch in tabular package
+\usepackage{makecell} % add newline inside table sell
+        \renewcommand\theadfont{\bfseries \small} % use /thead command to follow formatting
+% \usepackage{etoolbox} % all pages same header and footer included chapter 1st page but excluded title page
+        \AtBeginEnvironment{tabular}{\footnotesize} % table text font size
+        \AtBeginEnvironment{table}{\renewcommand{\baselinestretch}{1}} % table text line spacing
+        \makeatletter \renewcommand*{\fps@table}{b!} \makeatother % table default positioning bottom
+\usepackage{caption} % caption style and formatting for figure, sub-figure and table
+        \captionsetup[table]{position = above, skip = 5pt} % caption formatting for table
+        
+% figure environment
+% --------------------------------------------------------------------------------------
+\usepackage{graphicx} % an enhanced package to add figure
+        \graphicspath{{figures/}} % set pre-selected figure path
+\usepackage{subfig} % include multiple figures in one row
+        \setcounter{lofdepth}{2} % include sub figure in the list of tables (usepackage{subfig})
+% \usepackage{etoolbox} % all pages same header and footer included chapter 1st page but excluded title page
+        \AtBeginEnvironment{figure}{\renewcommand{\baselinestretch}{1}} % figure text line spacing
+        \makeatletter \renewcommand*{\fps@figure}{t!} \makeatother % figure default positioning top
+% \usepackage{caption} % caption style and formatting for figure, sub-figure and table
+        \captionsetup{justification = centering, size = footnotesize, labelfont = bf, format = hang, font = it, skip = 10pt, position = bottom, labelsep = quad} % caption formatting for figure
+        \captionsetup[subfloat]{justification = centerlast, labelfont = bf, font = it, size = footnotesize, margin = 3pt} % caption formatting for sub-figure
+        \makeatletter \g@addto@macro\@floatboxreset\centering \makeatother % all float boxes centering
+
+% algorithm
+% --------------------------------------------------------------------------------------
+\usepackage{algorithm, algpseudocode} % include the algorithm
+        \renewcommand{\algorithmicrequire}{\textbf{Input:}}  % Use Input in the format of Algorithm
+        \renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
+% \usepackage{etoolbox} % all pages same header and footer included chapter 1st page but excluded title page
+        \AtBeginEnvironment{algorithm}{\footnotesize \renewcommand{\baselinestretch}{1}} % algorithm styles
+        \makeatletter \renewcommand*{\fps@algorithm}{b!} \makeatother
+        
+% mathematics environment
+% --------------------------------------------------------------------------------------
+\usepackage[T1]{fontenc} % font with math support
+\usepackage{amsmath, amsthm, amssymb, amsfonts, bm} % use different mathematical operator
+\makeatletter
+    \g@addto@macro\normalsize{% equation before and after spacing
+    \setlength\abovedisplayskip{-10pt} % gather, align, except equation environment
+    \setlength\belowdisplayskip{10pt} % gather, align, except equation environment
+    \setlength\abovedisplayshortskip{-10pt} % equation environment
+    \setlength\belowdisplayshortskip{10pt}} % equation environment
+\makeatother
+
+% reference environment
+% --------------------------------------------------------------------------------------
+\usepackage{cite} % adding the references
+
+% keywords environment
+% --------------------------------------------------------------------------------------
+\newcommand{\enkeywords}[2]{\par\noindent\textit{\textbf{#1}} : \textit{#2}}
+\newcommand{\chkeywords}[2]{\par\noindent\begin{CJK*}{UTF8}{gkai} \textbf{#1} : #2 \end{CJK*}}
+
+% **************************************************************************************
+% Header and Footer
+% **************************************************************************************
+
+\pagestyle{fancy} % all pages will follow same fancy header and footer style except title page
+\fancyhf{} % Clear header and footer
+\fancyhead[C]{\begin{CJK*}{UTF8}{gbsn} \normalsize \textcolor{gray}{\textbf{华中科技大学研究生院}} \end{CJK*} \vspace{5pt}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{1pt} % Line at the header visible
+        % double line in header
+        \makeatletter
+        \def\headrule{{\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
+        \hrule\@height\headrulewidth\@width\headwidth
+        \vskip 2pt % space between lines
+        %\hrule\@height1pt\@width\headwidth % lower line width
+        \vskip-\headrulewidth
+        \vskip-1.5pt}}
+        \makeatother
+%\renewcommand{\footrulewidth}{1pt} % Line at the footer visible
+\usepackage{xpatch} % header rule red color     
+        \xpretocmd\headrule{\color{black}}{}{\PatchFailed}
+    \makeatletter % footer rule color using etoolbox package
+    \patchcmd{\footrule}{\if@fancyplain}{\color{black}\if@fancyplain}{}{}
+    \makeatother
+\patchcmd{\chapter}{head\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} % chapter page same header and footer
+\fancypagestyle{plain} % use toc, lof, lot same fancy style but not title page
+
+
+% **************************************************************************************
+% Thesis Title
+% **************************************************************************************
+
+\def\myentitle{Please Provide Suitable English Title}
+
+\def\mychtitle{\begin{CJK*}{UTF8}{gbsn} 题目：请提供合适的中文标题 \end{CJK*}}
+
+
+% **************************************************************************************
+% Author Information
+% **************************************************************************************
+
+\def\degree             {< Master/Ph.D. >}
+\def\myauthor           {< Name >}
+\def\studentid          {< Student ID >}
+\def\major              {< Major >}
+\def\advisor            {< Supervisor Name >}
+\def\school             {< School Name >}
+\def\majorchinese       {< Major in chinese >}
+\def\advisorchinese     {< Supervisor Name in Chinese >}
+\def\schoolchinese      {< School Name in Chinese >}
+\def\mydate             {< Submission Date >}
+\def\mydatechinese      {< year > 年\ < month > 月\ < date > 日}
+
+
+% **************************************************************************************
+% Start Main document
+% **************************************************************************************
+
+\begin{document}
+
+% **************************************************************************************
+% Title page
+% **************************************************************************************
+
+\input{frontmatter/ch_title_page.tex}
+\input{frontmatter/ch_note.tex}
+
+% **************************************************************************************
+% Main Body
+% **************************************************************************************
+
+\setupname % add all chapter name as "chapter" in toc
+\pagenumbering{arabic} % normal page number in main body
+
+\begin{CJK*}{UTF8}{gkai}
+\section{研究背景和意义}
+%\input{sections/background.tex}
+\newpage
+
+\section{国内外研究现状}
+%\input{sections/related.tex}
+%\cite{article}
+\newpage
+
+\section{课题研究内容}
+%\input{sections/contribution.tex}
+\newpage
+
+\section{总体方案设计}
+%\input{sections/method.tex}
+\newpage
+
+\end{CJK*}
+
+% **************************************************************************************
+% References
+% **************************************************************************************
+
+\renewcommand\refname{References}
+\bibliographystyle{ieeetr}
+\fontsize{10}{10}\selectfont{\bibliography{references.bib}}
+
+% **************************************************************************************
+% Signature Page
+% **************************************************************************************
+
+\input{endmatter/signature_page.tex}
+
+
+\end{document}
