@@ -9,7 +9,7 @@
 % Set document class, paper size and font size
 % **************************************************************************************
 
-\documentclass[a4paper, 12pt]{article}
+\documentclass[a4paper, 12pt]{report}
 
 
 % **************************************************************************************
@@ -137,13 +137,14 @@
 \newcommand{\enkeywords}[2]{\par\noindent\textit{\textbf{#1}} : \textit{#2}}
 \newcommand{\chkeywords}[2]{\par\noindent\begin{CJK*}{UTF8}{gkai} \textbf{#1} : #2 \end{CJK*}}
 
+
 % **************************************************************************************
 % Header and Footer
 % **************************************************************************************
 
 \pagestyle{fancy} % all pages will follow same fancy header and footer style except title page
 \fancyhf{} % Clear header and footer
-\fancyhead[C]{\begin{CJK*}{UTF8}{gbsn} \normalsize \textcolor{gray}{\textbf{华中科技大学研究生院}} \end{CJK*} \vspace{5pt}}
+\fancyhead[C]{\begin{CJK*}{UTF8}{gbsn} \large \textcolor{red}{\textbf{华 \; 中 \; 科 \; 技 \; 大 \; 学 \; 硕 \; 士 \; 学 \; 位 \; 论 \; 文}} \end{CJK*} \vspace{5pt}}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{1pt} % Line at the header visible
         % double line in header
@@ -151,15 +152,15 @@
         \def\headrule{{\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
         \hrule\@height\headrulewidth\@width\headwidth
         \vskip 2pt % space between lines
-        %\hrule\@height1pt\@width\headwidth % lower line width
+        \hrule\@height1pt\@width\headwidth % lower line width
         \vskip-\headrulewidth
         \vskip-1.5pt}}
         \makeatother
-%\renewcommand{\footrulewidth}{1pt} % Line at the footer visible
+\renewcommand{\footrulewidth}{1pt} % Line at the footer visible
 \usepackage{xpatch} % header rule red color     
-        \xpretocmd\headrule{\color{black}}{}{\PatchFailed}
+        \xpretocmd\headrule{\color{red}}{}{\PatchFailed}
     \makeatletter % footer rule color using etoolbox package
-    \patchcmd{\footrule}{\if@fancyplain}{\color{black}\if@fancyplain}{}{}
+    \patchcmd{\footrule}{\if@fancyplain}{\color{red}\if@fancyplain}{}{}
     \makeatother
 \patchcmd{\chapter}{head\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} % chapter page same header and footer
 \fancypagestyle{plain} % use toc, lof, lot same fancy style but not title page
@@ -201,8 +202,59 @@
 % Title page
 % **************************************************************************************
 
-\input{frontmatter/ch_title_page_open.tex}
-\input{frontmatter/ch_note_open.tex}
+\input{frontmatter/ch_title_page.tex}
+% \input{frontmatter/ch_note.tex}
+\input{frontmatter/en_title_page.tex}
+
+
+% **************************************************************************************
+% Declaration of Non-Plagiarism
+% **************************************************************************************
+
+\chapter*{\begin{CJK*}{UTF8}{gbsn} 独创性声明 \end{CJK*}} % Chinese Declaration
+\input{frontmatter/plag_ch.tex}
+% \chapter*{Declaration of Non-Plagiarism} % English  Abstract
+\input{frontmatter/plag_en.tex}
+
+
+% **************************************************************************************
+% Abstract of the Thesis
+% **************************************************************************************
+
+\pagenumbering{roman} % roman page number before main body
+\chapter*{\begin{CJK*}{UTF8}{gbsn} 摘要 \end{CJK*}} % Chinese abstract
+\input{frontmatter/abstract_ch.tex} % Chinese abstract
+\chkeywords{关键词}{HUST报告; HUST论文; HUST论文模板; 论文模板; HUST论文} % Chinese keywords
+\chapter*{Abstract} % English  Abstract
+\addcontentsline{toc}{chapter}{Abstract} % add English abstract in table of contents
+\input{frontmatter/abstract_en.tex}  % English Abstract
+\enkeywords{Index Terms}{HUST Report; HUST Dissertation; HUST Thesis Template; Thesis Template; HUST Thesis}
+
+% **************************************************************************************
+% Table of Contents, List of Figures and List of Tables
+% **************************************************************************************
+
+\begin{center}
+
+\renewcommand{\contentsname}{Table of Contents} % change title of contents to table of contents
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+\end{center}
+
+
+% **************************************************************************************
+% List of Abbreviations
+% **************************************************************************************
+
+\chapter*{List of Abbreviations}
+\addcontentsline{toc}{chapter}{List of Abbreviations} % add list of abbreviations in table of contents
+\input{frontmatter/abbreviations.tex}
+\newpage
 
 % **************************************************************************************
 % Main Body
@@ -211,33 +263,50 @@
 \setupname % add all chapter name as "chapter" in toc
 \pagenumbering{arabic} % normal page number in main body
 
-\begin{CJK*}{UTF8}{gkai}
-\section{研究背景和意义}
-%\input{sections/background.tex}
-\newpage
+\chapter{Introduction}
+\input{chapters/introduction.tex}
 
-\section{国内外研究现状}
-%\input{sections/related.tex}
-%\cite{article}
-\newpage
+\chapter{State of the Art}
+\input{chapters/literature_review.tex}
 
-\section{课题研究内容}
-%\input{sections/contribution.tex}
-\newpage
+\chapter{Research Methodology}
+\input{chapters/methodology.tex}
 
-\section{总体方案设计}
-%\input{sections/method.tex}
-\newpage
+\chapter{Performance Evaluation}
+\input{chapters/experiment.tex}
 
-\end{CJK*}
+\chapter{Conclusion}
+\input{chapters/conclusion.tex}
+
+
+% **************************************************************************************
+% Acknowledgement
+% **************************************************************************************
+
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+\input{endmatter/acknowledgement.tex}
+
 
 % **************************************************************************************
 % References
 % **************************************************************************************
 
-\renewcommand\refname{References}
+%\renewcommand{\bibname}{References} % change title name bibiliography to references
 \bibliographystyle{ieeetr}
 \fontsize{10}{10}\selectfont{\bibliography{references.bib}}
+
+
+% **************************************************************************************
+% Appendix
+% **************************************************************************************
+
+\setupname[Appendix]
+\appendix
+\chapter{Writing Appendix Rules}
+\normalsize
+\input{endmatter/appendices.tex}
+
 
 % **************************************************************************************
 % Signature Page
